@@ -6,9 +6,13 @@ users="pere marta anna pau jordi"
 
 for user in $users
 do
-  mkdir -p /tmp/home/$user
-  cp /opt/docker/README.md /tmp/home/$user
-  chown -R $user.$user /tmp/home/$user
+  line=$(getent passwd $user)
+  uid=$(echo $line | cut -d':' -f3)
+  gid=$(echo $line | cut -d':' -f4)
+  homedir=$(echo $line | cut -d':' -f6)
+  if [ ! -d $homedir ]; then
+    mkdir -p $homedir
+    cp /opt/docker/README.md $homedir/.
+    chown $uid.$gid $homedir
+  fi
 done
-
-
