@@ -1,0 +1,32 @@
+version: "2"
+services:
+  ldap:
+    image: adrinarvaez/ldapserver19:samba
+    container_name: ldapserver
+    hostname: ldapserver
+    ports: 
+      - "389:389"
+    networks:
+     - mynet
+  samba:
+    image: adrinarvaez/samba19:users
+    container_name: samba
+    hostname: samba
+    volumes:
+      - "homes:/tmp/home"
+    ports:
+      - "139:139"
+      - "445:445"
+    networks:
+     - mynet
+  pam:
+    image: adrinarvaez/hostpam19:samba
+    container_name: pam
+    hostname: pam
+    networks:
+     - mynet
+    privileged: true
+networks:
+ mynet:
+volumes:
+ homes:

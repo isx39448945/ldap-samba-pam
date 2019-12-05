@@ -6,7 +6,7 @@ usersunix="local1 local2 local3"
 for userunix in $usersunix
 do
   useradd $userunix
-  echo -e "$userunix\n$userunix" | passwd -a $userunix
+  echo "$userunix" | passwd --stdin $userunix
 done
 
 #users samba locals

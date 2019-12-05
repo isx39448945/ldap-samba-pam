@@ -1,11 +1,12 @@
 #! /bin/bash
-# install samba
-# -------------------------------------
+bash /opt/docker/auth.sh
+
 mkdir /var/lib/samba/public
 chmod 777 /var/lib/samba/public
 cp /opt/docker/* /var/lib/samba/public/.
-cp /opt/docker/system-auth /etc/pam.d/system-auth
-cp /opt/docker/nslcd.conf /etc/nslcd.conf
-cp /opt/docker/ldap.conf /etc/openldap/ldap.conf
-cp /opt/docker/nsswitch.conf /etc/nsswitch.conf
+
+mkdir /var/lib/samba/privat
+#chmod 777 /var/lib/samba/privat
+cp /opt/docker/*.md /var/lib/samba/privat/.
+
 cp /opt/docker/smb.conf /etc/samba/smb.conf
